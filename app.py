@@ -44,4 +44,5 @@ for image_file_name, item_info in info.items():
     print(f"  Stats: {item_info['stats']}")
 
 username = 'Moar 3ewbs'
-write_to_sheet(username, dummy_info)
+build_name = 'Healer'
+write_to_sheet(username, build_name, dummy_info)
