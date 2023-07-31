@@ -53,11 +53,12 @@ def write_to_sheet(username, build_name, info):
     for item_info in info.values():
         stats = item_info['stats']
         is_weapon = sum(stats.values()) > 26
-        if is_weapon:
-            start_row = int(start_row) + 1
         write_perks(worksheet, item_info, str(start_row), is_weapon)
         start_row = int(start_row) + 1
+        if is_weapon:
+            start_row = int(start_row) + 1
 
     # Auto resize columns A-F (1-6)
     worksheet.columns_auto_resize(1, 7)
+
 
