@@ -22,7 +22,7 @@ create_directory(directory_name)
 
 wait_for_active_window("New World")
 get_items()
-info = scrape_info(1, 10)
+info = scrape_info()
 for image_file_name, item_info in info.items():
     print(f"{image_file_name}:")
     print(f"  Perks: {item_info['perks']}")
