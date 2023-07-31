@@ -17,7 +17,7 @@ def convert2grayscale(directory = 'src/expertise_pattern'):
         cv2.imwrite(image_path, grayscale_image)
 
 # convert2grayscale()
-os.mkdir("build")
+# os.mkdir("build")
 
 # wait_for_active_window("New World")
 # get_items()
