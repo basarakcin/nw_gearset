@@ -69,5 +69,5 @@ for image_file_name, item_info in info.items():
 
 username = 'Moar 3ewbs'
 build_name = 'Healer'
-write_to_sheet(username, build_name, dummy_info)
-resize_colums()
+worksheet=write_to_sheet(username, build_name, dummy_info)
+resize_colums(worksheet)
