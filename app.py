@@ -20,9 +20,24 @@ def convert2grayscale(directory = 'src/expertise_pattern'):
 os.mkdir("build")
 create_directory(directory_name)
 
-wait_for_active_window("New World")
-get_items()
-info = scrape_info()
+# wait_for_active_window("New World")
+# get_items()
+# info = scrape_info()
+dummy_info = {
+    "item01.png": {
+        "perks": ["Blessed", "Refreshing Move", "Refreshing Divine Embrace"],
+        "stats": {"Focus": 31}
+    },
+    "item02.png": {
+        "perks": ["Keen", "Keen Speed", "Sundering Riposte"],
+        "stats": {"Focus": 31}
+    },
+    "item03.png": {
+        "perks": ["Resilient", "Freedom", "Fortifying Sacred Ground"],
+        "stats": {"Constitution": 26}
+    }
+}
+info=dummy_info
 for image_file_name, item_info in info.items():
     print(f"{image_file_name}:")
     print(f"  Perks: {item_info['perks']}")
