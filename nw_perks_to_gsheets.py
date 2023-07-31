@@ -8,7 +8,7 @@ from google.oauth2.service_account import Credentials
 def write_to_sheet(username, info):
     # use creds to create a client to interact with the Google Drive API
     scopes = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    creds = Credentials.from_service_account_file('path_to_your_service_account_file.json', scopes=scopes)
+    creds = Credentials.from_service_account_file('src/credentials/*.json', scopes=scopes)
     client = gspread.authorize(creds)
     
     # Find a workbook by name and open the first sheet
