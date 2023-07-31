@@ -1,4 +1,4 @@
-from nw_inventory_utils import *
+# from nw_inventory_utils import *
 from nw_inventory_scraping import *
 
 def convert2grayscale(directory = 'src/expertise_pattern'):
