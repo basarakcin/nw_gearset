@@ -55,5 +55,3 @@ def get_all_generated_perks():
             print(f"Failed to fetch data from page {page_num}. Status code: {response.status_code}")
 
     return all_perks
-    
-get_all_generated_perks()
