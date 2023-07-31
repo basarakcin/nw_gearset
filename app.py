@@ -68,6 +68,6 @@ for image_file_name, item_info in info.items():
     print(f"  Stats: {item_info['stats']}")
 
 username = 'Moar 3ewbs'
-build_name = 'Healer'
+build_name = 'Healer2'
 worksheet=write_to_sheet(username, build_name, dummy_info)
 resize_colums(worksheet)
