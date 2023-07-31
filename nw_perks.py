@@ -29,17 +29,24 @@ def get_perks_from_page(filename):
     return perks
 
 
+def save_response_content_to_file(response, filename):
+    with open(filename, "w", encoding='utf-8') as file:
+        file.write(response.text)
+
 def get_all_generated_perks():
     for page_num in range(1, 9):
         url = GENERATED_PERKS_LIST_URL + str(page_num)
         response = requests.get(url, headers=HEADERS)
 
         if response.status_code == 200:
-            # Process the data here, e.g., parse the response content
+            filename = "{:02d}.html".format(page_num)
+            save_response_content_to_file(response, filename)
+
+            # Process the data here, e.g., parse the saved HTML file
             # or do whatever you need to do with the data.
-            print(get_perks_from_page(response))
+            print(get_perks_from_page(filename))
         else:
             print(f"Failed to fetch data from page {page_num}. Status code: {response.status_code}")
     return
-
+    
 get_all_generated_perks()
