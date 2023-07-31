@@ -18,7 +18,6 @@ def convert2grayscale(directory = 'src/expertise_pattern'):
 
 # convert2grayscale()
 os.mkdir("build")
-create_directory(directory_name)
 
 # wait_for_active_window("New World")
 # get_items()
