@@ -5,13 +5,9 @@ perks = ["Lx) Blessed", "xX Refreshing Move", "=)x Refreshing"]
 matched_perks = []
 for perk in perks:
     cleaned_perk = perk.translate(str.maketrans('', '', string.punctuation)).strip()
-    if cleaned_perk in generated_perks:
-        matched_perks.append(cleaned_perk)
-    else:
-        for gen_perk in generated_perks:
-            if f" {cleaned_perk} " in f" {gen_perk} ":
-                matched_perks.append(gen_perk)
-                break
+    for gen_perk in generated_perks:
+        if gen_perk.startswith(cleaned_perk):
+            matched_perks.append(gen_perk)
+            break
 perks = matched_perks
 print(f"Perks: {perks}")
-
