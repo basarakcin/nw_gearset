@@ -13,11 +13,17 @@ def write_to_sheet(username, info):
     
     # Find a workbook by name and open the first sheet
     try:
-        sheet = client.open(username).sheet1
+        spreadsheet = client.open('New World Gears')  # change here
     except gspread.SpreadsheetNotFound:
         # if the sheet doesn't exist, create a new one
-        sh = client.create(username)  # returns Spreadsheet instance
-        sheet = sh.sheet1
+        spreadsheet = client.create('New World Gears')  # change here
+
+    # Check if a sheet with the username exists
+    try:
+        sheet = spreadsheet.worksheet(username)
+    except gspread.WorksheetNotFound:
+        # If the sheet doesn't exist, create a new one with the username as the title
+        sheet = spreadsheet.add_worksheet(title=username, rows="100", cols="20")
 
     # iterate over items and write data to the sheet
     for image_file_name, item_info in info.items():
