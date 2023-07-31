@@ -79,10 +79,10 @@ def extract_item_stats(text):
 
     return item_stats
 
-def scrape_info(start, end):
+def scrape_info():
     result = {}
     # Iterate over each image
-    for i in range(start, end+1):
+    for i in range(1, 11):
         # Add leading zero if number is less than 10 for proper file formatting
         num_str = str(i).zfill(2)
         
