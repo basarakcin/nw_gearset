@@ -1,5 +1,6 @@
 import re 
 import cv2
+import string
 from PIL import Image
 import pytesseract
 import numpy as np
@@ -98,19 +99,17 @@ def scrape_info(start, end):
         # Extract the perk names
         perks = extract_perk_names(text)
         print(f"Perks in {image_path}: {perks}")
-        
-        matched_perks = []
-        generated_perks = get_all_generated_perks()
+
         for perk in perks:
-            cleaned_perk = perk.translate(str.maketrans('', '', string.punctuation)).strip()
-            if cleaned_perk in generated_perks:
-                matched_perks.append(cleaned_perk)
-            else:
-                for gen_perk in generated_perks:
-                    if f" {cleaned_perk} " in f" {gen_perk} ":
-                        matched_perks.append(gen_perk)
-                        break
-        perks = matched_perks
+            cleaned_perk = perk.translate(str.maketrans('', '', string.punctuation)).strip().lower()
+            matches = [gen_perk for gen_perk in generated_perks if gen_perk.lower() in cleaned_perk]
+            
+            if matches:
+                # Sort the matches by length, descending, and take the first one
+                longest_match = sorted(matches, key=len, reverse=True)[0]
+                matched_perks.append(longest_match)
+        
+        print(f"Perks: {matched_perks}")
         
         # Extract the stats
         stats = extract_item_stats(text)
