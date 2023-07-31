@@ -62,6 +62,6 @@ def write_to_sheet(username, build_name, info):
         else:
             write_perks(worksheet, item_info, str(non_weapon_row), is_weapon)
             non_weapon_row += 1
-
-def resize_colums():
+    return worksheet
+def resize_colums(worksheet):
     worksheet.columns_auto_resize(0, 7)
