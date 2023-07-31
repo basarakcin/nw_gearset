@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 
@@ -34,6 +35,7 @@ def save_response_content_to_file(response, filename):
         file.write(response.text)
 
 def get_all_generated_perks():
+    all_perks = []
     for page_num in range(1, 9):
         url = GENERATED_PERKS_LIST_URL + str(page_num)
         response = requests.get(url, headers=HEADERS)
@@ -44,9 +46,14 @@ def get_all_generated_perks():
 
             # Process the data here, e.g., parse the saved HTML file
             # or do whatever you need to do with the data.
-            print(get_perks_from_page(filename))
+            page_perks = get_perks_from_page(filename)
+            all_perks.extend(page_perks)
+
+            # delete the file after parsing it
+            os.remove(filename)
         else:
             print(f"Failed to fetch data from page {page_num}. Status code: {response.status_code}")
-    return
+
+    return all_perks
     
 get_all_generated_perks()
