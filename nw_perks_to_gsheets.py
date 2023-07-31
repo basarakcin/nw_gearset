@@ -18,6 +18,9 @@ def write_to_sheet(username, info):
         # if the sheet doesn't exist, create a new one
         spreadsheet = client.create('New World Gears')  # change here
 
+    # Print the spreadsheet URL
+    print(f"Spreadsheet URL: https://docs.google.com/spreadsheets/d/{spreadsheet.id}")
+
     # Check if a sheet with the username exists
     try:
         sheet = spreadsheet.worksheet(username)
