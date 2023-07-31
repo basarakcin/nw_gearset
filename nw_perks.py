@@ -5,18 +5,6 @@ GENERATED_PERKS_LIST_URL="https://nwdb.info/db/perks/generated/page/"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"}
 
-for page_num in range(1, 9):
-    url = GENERATED_PERKS_LIST_URL + str(page_num)
-    response = requests.get(url, headers=HEADERS)
-
-    if response.status_code == 200:
-        # Process the data here, e.g., parse the response content
-        # or do whatever you need to do with the data.
-        print(f"Data from page {page_num}:")
-        print(response.text)
-    else:
-        print(f"Failed to fetch data from page {page_num}. Status code: {response.status_code}")
-        
 def get_perks_from_page(filename):
     # Open the HTML file and parse it with BeautifulSoup
     with open(filename, encoding='utf-8') as file:
@@ -40,7 +28,18 @@ def get_perks_from_page(filename):
 
     return perks
 
-# Call the function and print the perks
-# perks = get_perks_from_page("nwdb.html")
-# print(perks)
+
+def get_all_generated_perks():
+    for page_num in range(1, 9):
+        url = GENERATED_PERKS_LIST_URL + str(page_num)
+        response = requests.get(url, headers=HEADERS)
+
+        if response.status_code == 200:
+            # Process the data here, e.g., parse the response content
+            # or do whatever you need to do with the data.
+            print(get_perks_from_page(response))
+        else:
+            print(f"Failed to fetch data from page {page_num}. Status code: {response.status_code}")
+    return
+
 get_all_generated_perks()
