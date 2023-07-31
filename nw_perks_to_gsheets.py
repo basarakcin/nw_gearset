@@ -16,8 +16,8 @@ def write_to_sheet(username, info):
     except gspread.SpreadsheetNotFound:
         # if the sheet doesn't exist, create a new one
         spreadsheet = client.create('New World Gears')  # change here
-        spreadsheet.share('akcinbasar@gmail.com', perm_type='user', role='writer')  # share the spreadsheet
-
+       
+    spreadsheet.share('akcinbasar@gmail.com', perm_type='user', role='writer')  # share the spreadsheet
     # Print the spreadsheet URL
     print(f"Spreadsheet URL: https://docs.google.com/spreadsheets/d/{spreadsheet.id}")
 
