@@ -6,11 +6,11 @@ perks = ["Lx) Blessed", "xX Refreshing Move", "=)x Refreshing"]
 matched_perks = []
 for perk in perks:
     cleaned_perk = perk.translate(str.maketrans('', '', string.punctuation)).strip().lower()
-    for gen_perk in generated_perks:
-        gen_perk_lower = gen_perk.lower()
-        print(f"Comparing '{cleaned_perk}' with '{gen_perk_lower}'")
-        if cleaned_perk in gen_perk_lower:
-            matched_perks.append(gen_perk)
-            break
+    matches = [gen_perk for gen_perk in generated_perks if gen_perk.lower() in cleaned_perk]
+    
+    if matches:
+        # Sort the matches by length, descending, and take the first one
+        longest_match = sorted(matches, key=len, reverse=True)[0]
+        matched_perks.append(longest_match)
 
 print(f"Perks: {matched_perks}")
