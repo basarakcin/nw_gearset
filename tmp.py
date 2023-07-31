@@ -9,7 +9,7 @@ for perk in perks:
     for gen_perk in generated_perks:
         gen_perk_lower = gen_perk.lower()
         print(f"Comparing '{cleaned_perk}' with '{gen_perk_lower}'")
-        if gen_perk_lower.startswith(cleaned_perk):
+        if cleaned_perk in gen_perk_lower:
             matched_perks.append(gen_perk)
             break
 
