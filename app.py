@@ -35,6 +35,30 @@ dummy_info = {
     "item03.png": {
         "perks": ["Resilient", "Freedom", "Fortifying Sacred Ground"],
         "stats": {"Constitution": 26}
+    },
+    "item04.png": {
+        "perks": ["Resilient", "Freedom", "Elemental Aversion"],
+        "stats": {"Constitution": 26}
+    },
+    "item06.png": {
+        "perks": ["Resilient", "Freedom", "Elemental Aversion"],
+        "stats": {"Constitution": 26}
+    },
+    "item07.png": {
+        "perks": ["Resilient", "Freedom", "Shirking Energy"],
+        "stats": {"Constitution": 26}
+    },
+    "item08.png": {
+        "perks": ["Health", "Stamina Recovery", "Slash Protection"],
+        "stats": {"Constitution": 26}
+    },
+    "item09.png": {
+        "perks": ["Hearty", "Sacred", "Refreshing"],
+        "stats": {"Constitution": 26}
+    },
+    "item10.png": {
+        "perks": ["Refreshing Toast", "Healthy Toast", "Refreshing"],
+        "stats": {"Constitution": 26}
     }
 }
 info=dummy_info
