@@ -50,8 +50,8 @@ def write_to_sheet(username, build_name, info):
     start_row = find_build_name_or_empty_row(worksheet, build_name)
     write_build_name(worksheet, build_name, int(start_row))
 
-    weapon_row = int(start_row)
-    non_weapon_row = int(start_row)
+    weapon_row = int(start_row) + 1
+    non_weapon_row = int(start_row) + 1
     for item_info in info.values():
         stats = item_info['stats']
         is_weapon = sum(stats.values()) > 26
