@@ -1,6 +1,5 @@
 from nw_inventory_utils import *
 from nw_inventory_scraping import *
-from nw_perks import *
 
 def convert2grayscale(directory = 'src/expertise_pattern'):
     # Get a list of all image files in the directory
