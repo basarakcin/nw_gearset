@@ -81,6 +81,8 @@ def extract_item_stats(text):
 
 def scrape_info():
     result = {}
+    generated_perks = get_all_generated_perks()
+    
     # Iterate over each image
     for i in range(1, 11):
         # Add leading zero if number is less than 10 for proper file formatting
@@ -100,6 +102,7 @@ def scrape_info():
         perks = extract_perk_names(text)
         print(f"Perks in {image_path}: {perks}")
 
+        matched_perks = []
         for perk in perks:
             cleaned_perk = perk.translate(str.maketrans('', '', string.punctuation)).strip().lower()
             matches = [gen_perk for gen_perk in generated_perks if gen_perk.lower() in cleaned_perk]

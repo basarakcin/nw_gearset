@@ -52,9 +52,16 @@ def get_screenshot_of_monitor(monitor_number=0):
 
 def match_template(screenshot, templates):
     screenshot_gray = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
-    max_vals = [cv2.minMaxLoc(cv2.matchTemplate(screenshot_gray, template, cv2.TM_CCOEFF_NORMED))[1] 
-                for template in templates]
+    max_vals = []
+    for template in templates:
+        try:
+            max_val = cv2.minMaxLoc(cv2.matchTemplate(screenshot_gray, template, cv2.TM_CCOEFF_NORMED))[1]
+            max_vals.append(max_val)
+        except cv2.error as e:
+            print(f"Error occurred with template: {e}")
+            continue
     return max(max_vals)
+
 
 def get_screenshot():
     monitor_number = get_active_window_monitor("New World")
@@ -156,9 +163,18 @@ def get_item_positions():
 
     for pattern_file in pattern_files:
         expertise_pattern = cv2.imread(pattern_file, 0)
+        
+        # If the template is larger than the image, skip this template
+        if (expertise_pattern.shape[0] > screenshot_gray.shape[0]) or (expertise_pattern.shape[1] > screenshot_gray.shape[1]):
+            print(f"Template {pattern_file} is larger than the screenshot, skipping...")
+            continue
 
-        # Perform template matching
-        res = cv2.matchTemplate(screenshot_gray, expertise_pattern, cv2.TM_CCOEFF_NORMED)
+        try:
+            # Perform template matching
+            res = cv2.matchTemplate(screenshot_gray, expertise_pattern, cv2.TM_CCOEFF_NORMED)
+        except cv2.error as e:
+            print(f"Error matching template {pattern_file}: {e}")
+            continue
 
         # Set a threshold to decide which matches to keep; this may need tuning
         threshold = 0.6
@@ -166,10 +182,10 @@ def get_item_positions():
         # Find the locations where the match score exceeds the threshold
         locs = np.where(res >= threshold)
 
-        # Check if there are at least 10 matches
-        if len(locs[0]) < 10:
-            print(f"Expertise lower than 625 for pattern {pattern_file}...")
-            continue
+        # # Check if there are at least 10 matches
+        # if len(locs[0]) < 10:
+        #     print(f"Expertise lower than 625 for pattern {pattern_file}...")
+        #     continue
 
         # For each location where the match was found
         for pt in zip(*locs[::-1]):
@@ -183,8 +199,12 @@ def get_item_positions():
             # Define the center of the match area (both horizontally and vertically)
             center_pos = (pt[0] + expertise_pattern.shape[1]//2, pt[1] + expertise_pattern.shape[0]//2)
 
-            # Define the item position: center of match and X pixels to the right (X being the width of the template)
-            item_pos = (center_pos[0] + expertise_pattern.shape[1], center_pos[1])
+            # # Define the item position: center of match and X pixels to the right (X being the width of the template)
+            # item_pos = (center_pos[0] + expertise_pattern.shape[1], center_pos[1])
+            # Define the item position: from the middle of the expertise_pattern, add 4x length of the 
+            # expertise_pattern x-axis length (width), keep the y coordinate the same
+            item_pos = (center_pos[0] + 2*expertise_pattern.shape[1], center_pos[1])
+
             item_positions.append(item_pos)
 
     # Eliminate coordinates that are too close

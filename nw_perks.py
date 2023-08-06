@@ -1,5 +1,6 @@
 import os
-import requests
+# import requests
+import pip._vendor.requests as requests
 from bs4 import BeautifulSoup
 
 GENERATED_PERKS_LIST_URL="https://nwdb.info/db/perks/generated/page/"
